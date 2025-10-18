@@ -1,0 +1,12 @@
+# tests/test_health.py
+from __future__ import annotations
+
+from fastapi.testclient import TestClient
+from main import app
+
+
+def test_health():
+    client = TestClient(app)
+    r = client.get("/health")
+    assert r.status_code == 200
+    assert r.json()["status"] == "ok"
